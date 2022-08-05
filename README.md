@@ -25,3 +25,11 @@ In a seperate terminal you can start ngrok using the following command
 ```
 > ngrok http http://127.0.0.1:5000
 ```
+
+Register a custom run task in Teraform Cloud
+
+![](runtask-setup.png)
+
+Ensure that the runtask is assigned to a workspace
+
+![](runtask-workspace-setup.png)
