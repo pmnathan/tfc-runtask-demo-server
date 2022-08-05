@@ -1,7 +1,21 @@
 from urllib.request import Request, urlopen
+import subprocess, ssl, json
 from opa_client.opa import OpaClient
-import ssl
-import json
+
+def post_data(url, data, headers={'Content-Type':'application/json'}):
+    """
+    POST data string to `url`, return page and headers
+    """
+    # if data is not in bytes, convert to it to utf-8 bytes
+    bindata = data if type(data) == bytes else data.encode('utf-8')
+    # need Request to pass headers
+    req = Request(url, bindata, headers)
+    resp = urlopen(req)
+    return resp.read(), resp.getheaders()
+
+def run_opa_as_shell():
+    app.logger.info("Start subprocess for OPA request")
+
 
 def process_opa(app, rq):
     app.logger.info("Processing OPA request")
