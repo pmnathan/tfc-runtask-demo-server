@@ -2,16 +2,11 @@ from urllib.request import Request, urlopen
 import subprocess, ssl, json,  shlex, os
 #from opa_client.opa import OpaClient
 
-
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE #adding this because of the error: "certificate verify failed"
 
-
-
-
-
-def post_data(url,token,body):
+def tfc_callback(app,url,token,body):
     # need Request to pass headers
     jsondata = json.dumps(body)
     jsondataasbytes = jsondata.encode('utf-8')   # needs to be bytes
@@ -20,15 +15,8 @@ def post_data(url,token,body):
     req.add_header('Content-Type', 'application/vnd.api+json')
     req.add_header('Authorization', 'Bearer ' + token)
     req.method = 'PATCH'
-
-    print("#####")
-    print(url)
-    print(token)
     resp = urlopen(req,context=ctx)
-
-
-
-
+    app.logger.info("Response from TFC: %s", resp.read())
 
 
 # one of the 2 ways to interact with OPA
@@ -121,7 +109,7 @@ def process_opa(app, rq):
                             "type": "task-results",
                             "attributes": {
                                 "status": "passed",
-                                "message": "OPA Check Passed",
+                                "message": "OPA Check Passed - sample message from OPA",
                                 "url": "https://example.com"
                             }
                         }
@@ -132,7 +120,7 @@ def process_opa(app, rq):
                             "type": "task-results",
                             "attributes": {
                                 "status": "failed",
-                                "message": "OPA Check Failed",
+                                "message": "OPA Check Failed - sample message from OPA",
                                 "url": "https://example.com"
                             }
                         }
@@ -141,4 +129,4 @@ def process_opa(app, rq):
 
     #send response to TFC
     app.logger.info("Sending response to TFC - %s", callback_url)
-    post_data(callback_url, token, response)
+    tfc_callback(app,callback_url, token, response)

@@ -1,7 +1,7 @@
 # TFC OPA RunTask Server
 
 ## Local Dev Server Setup
-**This code is for POC and in no way should be used for production use cases.**
+**This code is for POC and should not be used for production use cases.**
 
  Required prerequisites - Python 3, pip & OPA. 
  
