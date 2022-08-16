@@ -1,9 +1,11 @@
-# TFC OPA RunTask Server
+# TFC Demo RunTask Server
 
 ## Local Dev Server Setup
 **This code is for POC and should not be used for production use cases.**
+** for Post-Plan run task - this code base will call a OPA binary for plan validation**
 
- Required prerequisites - Python 3, pip & OPA. 
+
+ Required prerequisites - Python 3, pip. 
  
  To expose the server to a public URL for integration with TFC [Run Task](https://www.terraform.io/cloud-docs/integrations/run-tasks) use a tool such as [ngrok](https://ngrok.com).
 
